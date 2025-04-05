@@ -8,6 +8,15 @@
 |------------|-----------|
 | ![](public/light.png) | ![](public/dark.png) |
 
+
+## 🛠 Tools Used
+
+- **Framework**: [Vue.js](https://vuejs.org)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com)
+- **State Management**: [Pinia](https://pinia.vuejs.org)
+- **Hooks / Data Fetching**: [Axios](https://axios-http.com) & [TanStack Query (Vue Query)](https://tanstack.com/query/latest/docs/framework/vue/overview)
+
+---
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
