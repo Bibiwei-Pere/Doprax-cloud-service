@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background-1: #f9fafb;
+    --background-2: #fff;
+    --border: #f3f4f6;
+    --border-gray: #e5e7eb;
+    --text-1: #000;
+    --text-2: #6b7280;
+    --foreground: #fff;
+    --foreground-reverse: #000;
+  }
+
+  .dark {
+    --background-1: #000;
+    --background-2: #262626;
+    --border: #374151;
+    --border-gray: #374151;
+    --text-1: #fff;
+    --text-2: #ede6e6;
+    --foreground: #374151;
+    --foreground-reverse: #fff;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    @apply p-0;
+    @apply m-0;
+  }
+  body {
+    @apply bg-background-1;
+    @apply font-inter;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  h1 {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 28px;
+    color: var(--text-1);
+    @screen lg {
+      font-size: 22px;
+    }
+  }
+
+  h2 {
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 28px;
+    color: var(--text-1);
+    @screen md {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+  h3 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--text-1);
+    @screen md {
+      font-size: 18px;
+    }
+  }
+
+  h4 {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+    color: var(--text-1);
+    @screen lg {
+      font-size: 16px;
+    }
+  }
+
+  h5 {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-1);
+    font-weight: 500;
+    @screen lg {
+      font-size: 15px;
+    }
+  }
+
+  h6 {
+    font-size: 14.5px;
+    line-height: 20px;
+    color: var(--text-1);
+    font-weight: 400;
+    @screen lg {
+      font-size: 15px;
+    }
+  }
+  p {
+    font-size: 14.5px;
+    color: var(--text-2);
+    line-height: 1.5;
+    font-weight: 400;
+    @screen lg {
+      font-size: 16px;
+    }
+  }
+}
