@@ -8,7 +8,7 @@ Or view both modes side by side:
 
 | Light Mode | Dark Mode |
 |------------|-----------|
-| ![](./light.png) | ![](./dark.png) |
+| ![](public/light.png) | ![](public/dark.png) |
 
 This template should help get you started developing with Vue 3 in Vite.
 
