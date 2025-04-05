@@ -88,7 +88,6 @@ function scrollToTop() {
 
         <Form
           :initial-values="{
-            region: 'US West (N. California)',
             resources: {
               vCPU: 2,
               memory: 4,

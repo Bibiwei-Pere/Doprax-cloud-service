@@ -24,10 +24,7 @@ export function useUpdateUser() {
     mutationFn: (data) => axiosInstance.put(`/users/${data.id}`, data),
     onError: () => toast.success("Failed to update cloud service, please try again"),
     onSuccess: (response, variables) => {
-      deployStore.setDeployedData({
-        ...response.data,
-        image: variables.image,
-      });
+      deployStore.setDeployedData(variables);
       toast.success("Cloud service successfully updated!");
     },
   });

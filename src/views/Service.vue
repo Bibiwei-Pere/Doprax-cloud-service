@@ -17,7 +17,6 @@ import { useUpdateUser } from "@/hooks/useDeploy";
 import { useDeleteUser } from "@/hooks/useDeploy";
 import { deploySchema } from "@/assets/schema";
 import { Loader2 } from "lucide-vue-next";
-import { onMounted } from "vue";
 import { nextTick } from "vue";
 
 const router = useRouter();
@@ -90,7 +89,15 @@ const handleDelete = () => {
           <Button
             :disabled="mutation.isPending.value"
             class="flex gap-2 items-center"
-            @click="() => mutation.mutate(values)"
+            @click="
+              () =>
+                mutation.mutate(
+                  { ...values },
+                  {
+                    onSuccess: () => (showEditFormOnly = false),
+                  }
+                )
+            "
             >Save changes
             <Loader2 v-if="mutation.isPending.value" class="w-4 h-4 animate-spin" />
           </Button>

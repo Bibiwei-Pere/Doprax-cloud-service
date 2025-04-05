@@ -2,6 +2,7 @@
 import { Field, ErrorMessage } from "vee-validate";
 import Label from "../utilities/Label.vue";
 import Input from "../utilities/Input.vue";
+import Radio from "../utilities/Radio.vue";
 
 const instanceTypes = [
   {
@@ -47,18 +48,20 @@ const resourceFields = [
       <Field name="instanceType" v-slot="{ value, handleChange }">
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3" v-for="option in instanceTypes" :key="option.value">
-            <input
-              type="radio"
-              :id="option.value"
-              :value="option.value"
-              :checked="value === option.value"
-              @change="handleChange"
-              class="w-4 h-4 cursor-pointer"
-            />
-            <Label class="flex flex-col cursor-pointer" :for="option.value"
-              >{{ option.label }}
-              <p class="text-sm relative -mt-2">{{ option.description }}</p>
-            </Label>
+            <div
+              role="radio"
+              tabindex="0"
+              class="flex items-center gap-3 cursor-pointer"
+              :aria-checked="value === option.value"
+              @click="handleChange(option.value)"
+              @keyup.enter.space="handleChange(option.value)"
+            >
+              <Radio :checked="value === option.value" />
+              <Label class="flex flex-col cursor-pointer" :for="option.value"
+                >{{ option.label }}
+                <p class="text-sm relative -mt-2">{{ option.description }}</p>
+              </Label>
+            </div>
           </div>
         </div>
       </Field>

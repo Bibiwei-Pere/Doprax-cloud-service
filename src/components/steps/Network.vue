@@ -2,6 +2,7 @@
 import { Field, ErrorMessage, useField } from "vee-validate";
 import Label from "../utilities/Label.vue";
 import Select from "../utilities/Select.vue";
+import Checkbox from "../utilities/Checkbox.vue";
 
 const securityGroups = ["Web Traffic (80, 443)", "SSH Access (22)", "Database (3306, 5432)", "Internal Only"];
 
@@ -39,12 +40,14 @@ const {
           <Label :required="true" :for="fieldDef.key">{{ fieldDef.label }}</Label>
 
           <Field :name="fieldDef.name" v-slot="{ field, errorMessage }">
-            <Select v-bind="field" :hasError="Boolean(errorMessage)">
-              <option v-for="option in fieldDef.arr" :key="option" :value="option">
-                {{ option }}
-              </option>
-            </Select>
-            <ErrorMessage class="text-red-500 text-sm" name="fieldDef.name" />
+            <Select
+              :modelValue="field.value"
+              @update:modelValue="field.onChange"
+              :hasError="Boolean(errorMessage)"
+              :options="fieldDef.arr"
+            />
+
+            <ErrorMessage class="text-red-500 text-sm" :name="fieldDef.name" />
           </Field>
         </div>
       </div>
@@ -52,19 +55,39 @@ const {
       <div class="flex flex-col gap-2">
         <Field name="network.publicIp" v-slot="{ value, handleChange }">
           <div class="flex items-center gap-2">
-            <input
-              id="publicIp"
-              type="checkbox"
-              :checked="value"
-              @change="handleChange($event.target.checked)"
-              class="w-4 h-4 cursor-pointer"
-            />
+            <Checkbox :checked="value" @update:checked="handleChange" />
             <Label for="publicIp">Assign public IP address</Label>
           </div>
         </Field>
         <p>Enable this to make your service accessible from the internet</p>
       </div>
+
       <div class="flex flex-col gap-3">
+        <Label required>Security Groups</Label>
+
+        <div class="flex items-center gap-3" v-for="option in securityGroups" :key="option">
+          <Checkbox
+            :checked="selectedGroups.includes(option)"
+            @update:checked="
+              (checked) => {
+                const selected = [...selectedGroups];
+                if (checked) {
+                  selected.push(option);
+                } else {
+                  const index = selected.indexOf(option);
+                  if (index !== -1) selected.splice(index, 1);
+                }
+                updateSecurityGroups(selected);
+              }
+            "
+          />
+          <Label :for="option">{{ option }}</Label>
+        </div>
+
+        <p v-if="securityGroupError" class="text-red-500 text-sm">{{ securityGroupError }}</p>
+      </div>
+
+      <!-- <div class="flex flex-col gap-3">
         <Label required>Security Groups</Label>
         <div class="flex items-center gap-3" v-for="option in securityGroups" :key="option">
           <input
@@ -89,7 +112,7 @@ const {
           <Label :for="option">{{ option }}</Label>
         </div>
         <p v-if="securityGroupError" class="text-red-500 text-sm">{{ securityGroupError }}</p>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

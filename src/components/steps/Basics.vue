@@ -118,11 +118,12 @@ const handleDelete = () => {
       <div class="flex flex-col gap-2">
         <Label :required="true" for="region">Region</Label>
         <Field name="region" v-slot="{ field, errorMessage }">
-          <Select v-bind="field" :hasError="Boolean(errorMessage)">
-            <option v-for="option in regions" :key="option" :value="option">
-              {{ option }}
-            </option>
-          </Select>
+          <Select
+            :modelValue="field.value"
+            @update:modelValue="field.onChange"
+            :hasError="Boolean(errorMessage)"
+            :options="regions"
+          />
         </Field>
         <ErrorMessage class="text-red-500 text-sm" name="region" />
       </div>
